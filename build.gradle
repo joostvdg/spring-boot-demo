@@ -8,7 +8,6 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.1.BUILD-SNAPSHOT")
-        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
     }
 }
 
@@ -25,11 +24,12 @@ plugins {
 apply plugin: 'build-announcements'
 apply plugin: 'spring-boot'
 apply plugin: 'idea'
-apply plugin: 'com.bmuschko.nexus'
 
+group = 'nl.cam.spring-boot'
+description = "spring-boot-demo"
 
 jar {
-    baseName = 'spring-boot-demo'
+    baseName = 'spring-boot-demo-1'
     version =  '0.0.1-SNAPSHOT'
 }
 
@@ -78,10 +78,17 @@ checkstyle {
     toolVersion = "6.11.2"
 }
 
-nexus {
-    sign = true
-    repositoryUrl = 'https://localhost:8443/repository/maven-releases/'
-    snapshotRepositoryUrl = 'https://localhost:8443/repository/maven-snapshots/'
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "${nexusUrl}/repository/maven-releases") {
+                authentication(userName: nexusUsername, password: nexusPassword)
+            }
+            snapshotRepository(url: "${nexusUrl}/repository/maven-snapshots") {
+                authentication(userName: nexusUsername, password: nexusPassword)
+            }
+        }
+    }
 }
 
 // release possibility
