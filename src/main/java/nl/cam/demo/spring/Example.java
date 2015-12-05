@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
-@EnableAutoConfiguration
 public class Example {
 
     private static final String template = "Hello, %s!";
