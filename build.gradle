@@ -16,6 +16,7 @@ plugins {
     id 'jacoco'
     id 'pmd'
     id 'maven-publish'
+    id 'maven'
     id 'checkstyle'
     id 'net.researchgate.release' version '2.3.1'
 }
